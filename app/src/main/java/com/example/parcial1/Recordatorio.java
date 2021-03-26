@@ -5,6 +5,8 @@ public class Recordatorio {
     private int posx, posy;
     private String mensaje, importancia, confirmacion;
 
+    //se definen los atributos que va a tener el recordatorio
+
     public Recordatorio(int posx, int posy, String mensaje, String importancia,String confirmacion) {
         this.posx = posx;
         this.posy = posy;

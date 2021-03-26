@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         posyEdit = findViewById(R.id.posyEdit);
         recordarText = findViewById(R.id.recordarText);
 
+        //aqui se inicia la conexión
         new Thread(
                 ()-> {
                     try {
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).start();
 
-
+        //se le asigna un string a cada color para que en eclipse se pueda poner el recordatorio del color seleccionado
         greenBtn.setOnClickListener(
                 (v) -> {
                     importancia = "verde";
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     posx = Integer.parseInt(posxEdit.getText().toString());
                     posy = Integer.parseInt(posyEdit.getText().toString());
                     mensaje = recordarText.getText().toString();
+                    //se asigna este string para agregar el recordatorio a un arreglo
                     confirmacion = "confirmar";
                     initClient();
 
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     posx = Integer.parseInt(posxEdit.getText().toString());
                     posy = Integer.parseInt(posyEdit.getText().toString());
                     mensaje = recordarText.getText().toString();
+                    //este string es para ver el recordatorio, pero aun no se agrega al arreglo
                     confirmacion = "vista";
 
                     initClient();
@@ -103,12 +106,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initClient() {
+        //se envia el recordatorio en un json
         Gson gson = new Gson();
         Recordatorio recordatorio = new Recordatorio(posx, posy, mensaje,importancia,confirmacion);
         String conexion = gson.toJson(recordatorio);
 
         new Thread(()-> {
             try {
+                //se hace el envio como tal
                 bwriter.write(conexion+"\n");
                 bwriter.flush();
             } catch (IOException e) {
