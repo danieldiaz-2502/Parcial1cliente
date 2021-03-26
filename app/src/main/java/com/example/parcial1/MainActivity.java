@@ -3,6 +3,7 @@ package com.example.parcial1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -42,18 +43,19 @@ public class MainActivity extends AppCompatActivity {
         new Thread(
                 ()-> {
                     try {
-                        Socket socket = new Socket("192.168.1.1", 6000);
+                        Socket socket = new Socket("192.168.1.1", 5000);
                         InputStream is = socket.getInputStream();
                         OutputStream os = socket.getOutputStream();
                         OutputStreamWriter osw = new OutputStreamWriter(os);
                         bwriter = new BufferedWriter(osw);
-
+                        Log.e("mensaje"," "+ bwriter);
                     } catch (UnknownHostException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }).start();
+
 
         greenBtn.setOnClickListener(
                 (v) -> {
@@ -76,11 +78,10 @@ public class MainActivity extends AppCompatActivity {
         confirmarBtn.setOnClickListener(
                 (v) -> {
 
-                    posx = Integer.parseInt(String.valueOf(posxEdit));
-                    posy = Integer.parseInt(String.valueOf(posyEdit));
-                    confirmacion = "confirmar";
+                    posx = Integer.parseInt(posxEdit.getText().toString());
+                    posy = Integer.parseInt(posyEdit.getText().toString());
                     mensaje = recordarText.getText().toString();
-
+                    confirmacion = "confirmar";
                     initClient();
 
                 }
