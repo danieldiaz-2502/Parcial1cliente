@@ -90,10 +90,10 @@ public class MainActivity extends AppCompatActivity {
         vistaBtn.setOnClickListener(
                 (v) -> {
 
-                    posx = Integer.parseInt(String.valueOf(posxEdit));
-                    posy = Integer.parseInt(String.valueOf(posyEdit));
-                    confirmacion = "vista";
+                    posx = Integer.parseInt(posxEdit.getText().toString());
+                    posy = Integer.parseInt(posyEdit.getText().toString());
                     mensaje = recordarText.getText().toString();
+                    confirmacion = "vista";
 
                     initClient();
 
